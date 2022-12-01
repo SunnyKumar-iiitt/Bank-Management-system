@@ -52,6 +52,91 @@ class user
       cout<<name;
       }
  };
+class Account : public user
+{
+  protected:
+  char accnt[16],type,password[18],yes;
+  int blnc,i;
+  public:
+    void accntgetdata()
+	{
+		fstream file;
+
+	  usergetdata();
+	  cout<<"\n\t\t\t Enter Account No : ";
+	  for(i=0;i<16;i++)
+      {
+	  	   accnt[i]=0;
+	   }
+		i=0;
+	  cin>>accnt;
+	  retry:     // label if Amount less
+	  cout<<"\n\t\t\t Enter type of Account (C/S) : ";
+	  cin>>type;
+	  blnc=0;
+	  if(type=='s' || type =='S')
+	  {
+	   five:
+	   cout<<"\n\t\t\t Enter Initial Amount (>= $.500) : ";
+	   cin>>blnc;
+	   if(blnc<500){
+	     cout<<"\n\t\t\t Please Enter greater than $.500"<<endl;
+	     goto five;
+	     }
+	   }
+	  else if(type=='C' || type =='c')
+	  {
+	    ten:
+	    cout<<"\n\t\t\t Enter Initial Amount (>= $.1000) : ";
+		cin>>blnc;
+		if(blnc<1000){
+	     cout<<"\n\t\t\t Please Enter greater than $.1000"<<endl;
+		  goto ten;
+		  }
+	  }
+
+	  else
+	  {
+	    cout<<"\n\t\t\t Try Again Press 'c' for Current Account , 's' for Saving Account"<<endl;
+		goto retry;
+	  }
+	  cout<<"\n\t\t\t Create Password : ";
+	  for(i=0;i<18;i++)
+      {
+	  	   password[i]=0;
+	   }
+	   i=0;
+	  while((password[i]=getch())!='\r')
+    {
+		  printf("*");
+    	  i++;
+	}
+	   system("cls");
+	   intro();
+	   cout<<"\n\n\n\n\n\n\n\n\n\t\t\t Press 'Y' to Confirm 'N' to retry  : ";
+	   cin>>yes;
+	   if(yes=='y' || yes=='Y')
+	   {
+	      cout<<"\n\n\n\t\t\t    Account Successfully Created ";
+	      getch();
+	    }
+		else
+		{
+		     system("cls");
+		     intro();
+		     cout<<endl<<endl<<endl<<endl;
+			 accntgetdata();
+		}
+		file.open("user_data.txt",ios::app |ios::out);
+		file<<"Name"<<name<<endl<<"Account No:"<<accnt<<endl<<"Balance:"<<blnc<<endl;
+		file.close();
+
+		
+
+	}
+	
+
+};
 
 // main Function
 int main()
