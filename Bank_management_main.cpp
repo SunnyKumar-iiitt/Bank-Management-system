@@ -125,7 +125,7 @@ int main()
 
 }
 
-
+// function showing on starting of program to 1.create accout 2. sign up 3.Exit.
 void main_menu(Transaction &a1)
 {
   welcome();
